@@ -72,6 +72,12 @@ class UserLoginForm extends Model
             $this->_user = User::findByUsername($this->username);
         }
 
+        // Nếu chưa có Auth Key thì tạo mới
+        if ($this->_user->user_auth_key == null) {
+            $this->_user->generateAuthKey();
+            $this->_user->save();
+        }
+
         return $this->_user;
     }
 }

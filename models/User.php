@@ -42,9 +42,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['user_name', 'user_email', 'user_username', 'user_password', 'user_birthday', 'user_role'], 'required'],
             [['user_birthday'], 'safe'],
-            [['user_role', 'user_remember'], 'integer'],
+            [['user_role'], 'integer'],
             [['user_name', 'user_email', 'user_username'], 'string', 'max' => 64],
-            [['user_password'], 'string', 'max' => 128]
+            [['user_password'], 'string', 'max' => 128],
+            [['user_auth_key'], 'string', 'max' => 256]
         ];
     }
 
@@ -136,7 +137,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->auth_key;
+        return $this->user_auth_key;
     }
 
     /**
@@ -173,7 +174,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->security->generateRandomString();
+        $this->user_auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
