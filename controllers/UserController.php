@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
+use app\models\UserLoginForm;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -127,7 +127,7 @@ class UserController extends Controller
             return $this->redirect(array('admin/index')); 
         }
 
-        $model = new LoginForm();
+        $model = new UserLoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {

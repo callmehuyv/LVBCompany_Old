@@ -24,6 +24,7 @@ class User extends ActiveRecord implements IdentityInterface
     public $password;
     public $auth_key;
     public $access_token;
+    public $token;
 
     /**
      * @inheritdoc
@@ -41,7 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['user_name', 'user_email', 'user_username', 'user_password', 'user_birthday', 'user_role'], 'required'],
             [['user_birthday'], 'safe'],
-            [['user_role'], 'integer'],
+            [['user_role', 'user_remember'], 'integer'],
             [['user_name', 'user_email', 'user_username'], 'string', 'max' => 64],
             [['user_password'], 'string', 'max' => 128]
         ];
@@ -73,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
