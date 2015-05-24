@@ -7,8 +7,7 @@ use yii\base\Model;
 /**
  * Login form
  */
-class UserLoginForm extends Model
-{
+class UserLoginForm extends Model {
     public $username;
     public $password;
     public $remember = true;
@@ -18,14 +17,10 @@ class UserLoginForm extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            // username and password are both required
             [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
             ['remember', 'boolean'],
-            // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
     }
@@ -37,8 +32,7 @@ class UserLoginForm extends Model
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
-    {
+    public function validatePassword($attribute, $params) {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
@@ -52,10 +46,17 @@ class UserLoginForm extends Model
      *
      * @return boolean whether the user is logged in successfully
      */
-    public function login()
-    {
+    public function login() {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->remember ? 3600 * 24 * 30 : 0);
+            if ($this->remember) {
+                $param_remember = 3600 * 24 * 30;
+                if ($this->_user === false) {
+                    $this->_user = User::findByUsername($this->username);
+                }
+            } else {
+                $param_remember = 0;
+            }
+            return Yii::$app->user->login($this->getUser(), $param_remember);
         } else {
             return false;
         }
@@ -66,18 +67,10 @@ class UserLoginForm extends Model
      *
      * @return User|null
      */
-    public function getUser()
-    {
+    public function getUser() {
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
         }
-
-        // Nếu chưa có Auth Key thì tạo mới
-        if ($this->_user->user_auth_key == null) {
-            $this->_user->generateAuthKey();
-            $this->_user->save();
-        }
-
         return $this->_user;
     }
 }

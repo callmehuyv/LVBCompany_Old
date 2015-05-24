@@ -31,7 +31,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'user';
+        return 'users';
     }
 
     /**
@@ -45,7 +45,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['user_role'], 'integer'],
             [['user_name', 'user_email', 'user_username'], 'string', 'max' => 64],
             [['user_password'], 'string', 'max' => 128],
-            [['user_auth_key'], 'string', 'max' => 256]
+            [['user_auth_key', 'user_access_token'], 'string', 'max' => 256]
         ];
     }
 
@@ -102,8 +102,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'user_reset_token' => $token
         ]);
     }
 

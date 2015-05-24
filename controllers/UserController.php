@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UserLoginForm;
+use yii\data\Pagination;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -35,6 +36,9 @@ class UserController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => User::find(),
+            'pagination' => [
+                'pageSize' => 5,
+            ]
         ]);
 
         return $this->render('index', [

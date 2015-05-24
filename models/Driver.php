@@ -22,7 +22,7 @@ class Driver extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'driver';
+        return 'drivers';
     }
 
     /**

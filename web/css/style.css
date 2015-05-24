@@ -1,3 +1,32 @@
 #yii-debug-toolbar {
 	display: none;
 }
+.wrap-item a span {
+	font-size: 50px;
+}
+.wrap-item a, .wrap-item a span {
+	color: #FFFFFF;
+	margin-top: 25px;
+}
+.wrap-item {
+  width: 115px;
+  height: 125px;
+  background: #337AB7;
+  color: #FFFFFF;
+  border-radius: 7px;
+  box-shadow: 4px 4px 7px #B5B5B5;
+  text-align: center;
+}
+
+#admin_page .row .col-md-2 {
+	margin-bottom: 35px;
+}
+#admin_page .row .col-md-2:nth-child(4) {
+	clear: left;
+}
+#admin_page h1 {
+	margin-bottom: 30px;
+}
+a {
+	text-decoration: none !important;
+}

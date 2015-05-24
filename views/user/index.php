@@ -17,20 +17,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'user_id',
-            'user_name',
-            'user_email:email',
-            'user_password',
-            'user_birthday',
-            // 'user_role',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <?=
+        GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                'user_id',
+                'user_name',
+                'user_email:email',
+                'user_birthday',
+                ['class' => 'yii\grid\ActionColumn'],
+                array(
+                    'format'  =>  'image',
+                    'attribute' => 'user_name',
+                    'value'=>function($data){
+                        return $data->user_name;
+                    }
+                )
+            ]
+        ]);
+    ?>
 
 </div>

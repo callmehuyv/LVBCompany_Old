@@ -14,7 +14,7 @@ use yii\widgets\Breadcrumbs;
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
 
-    <link href="<?php echo HomeUrl() ?>/assets/b7cdfbad/css/bootstrap.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo HomeUrl() ?>/css/site.css" rel="stylesheet">
     <link href="<?php echo HomeUrl() ?>/css/style.css" rel="stylesheet">
 

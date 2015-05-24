@@ -20,7 +20,7 @@ class Line extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'line';
+        return 'lines';
     }
 
     /**
