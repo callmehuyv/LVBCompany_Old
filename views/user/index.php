@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'user_birthday',
                 ['class' => 'yii\grid\ActionColumn'],
                 array(
-                    'format'  =>  'image',
+                    'format'  =>  'html',
                     'attribute' => 'user_name',
                     'value'=>function($data){
                         return $data->user_name;
